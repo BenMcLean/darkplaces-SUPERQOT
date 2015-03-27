@@ -12269,6 +12269,7 @@ static void R_DrawDebugModel(void)
 	int i, j, flagsmask;
 	const msurface_t *surface;
 	dp_model_t *model = ent->model;
+	boolean isEnviro = (strcmp(model->modeldatatypestring, "MDL") != 0);
 
 	if (!sv.active  && !cls.demoplayback && ent != r_refdef.scene.worldentity)
 		return;
@@ -12293,10 +12294,11 @@ static void R_DrawDebugModel(void)
 				GL_CullFace((rsurface.texture->currentmaterialflags & MATERIALFLAG_NOCULLFACE) ? GL_NONE : r_refdef.view.cullface_back);
 				if (!rsurface.texture->currentlayers->depthmask)
 					GL_Color(c, 0, 0, 1.0f);
-				else if (ent == r_refdef.scene.worldentity)
-					GL_Color(c, c, c, 1.0f);
+				else if (ent == r_refdef.scene.worldentity || isEnviro)
+					//GL_Color(c, c, c, 1.0f);
+					continue;
 				else
-					GL_Color(0, c, 0, 1.0f);
+					GL_Color(c, 0, 0, 1.0f);
 				R_Mesh_PrepareVertices_Generic_Arrays(rsurface.batchnumvertices, rsurface.batchvertex3f, NULL, NULL);
 				RSurf_DrawBatch();
 			}
@@ -12386,7 +12388,7 @@ static void R_DrawDebugModel(void)
 				RSurf_PrepareVerticesForBatch(BATCHNEED_ARRAY_VERTEX | BATCHNEED_ARRAY_NORMAL | BATCHNEED_ARRAY_VECTOR | BATCHNEED_NOGAPS, 1, &surface);
 				if (!rsurface.texture->currentlayers->depthmask)
 					GL_Color(r_refdef.view.colorscale, 0, 0, r_showtris.value);
-				else if (ent == r_refdef.scene.worldentity || strcmp(model->modeldatatypestring, "MDL") != 0)
+				else if (ent == r_refdef.scene.worldentity || isEnviro)
 					//GL_Color(r_refdef.view.colorscale, r_refdef.view.colorscale, r_refdef.view.colorscale, r_showtris.value);
 					continue;
 				else

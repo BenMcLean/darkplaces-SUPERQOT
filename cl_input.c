@@ -66,7 +66,7 @@ static void KeyDown (kbutton_t *b)
 {
 	int k;
 	const char *c;
-
+	
 	c = Cmd_Argv(1);
 	if (c[0])
 		k = atoi(c);
@@ -156,8 +156,14 @@ static void IN_SpeedUp(void) {KeyUp(&in_speed);}
 static void IN_StrafeDown(void) {KeyDown(&in_strafe);}
 static void IN_StrafeUp(void) {KeyUp(&in_strafe);}
 
-static void IN_AttackDown(void) {KeyDown(&in_attack);}
-static void IN_AttackUp(void) {KeyUp(&in_attack);}
+static void IN_AttackDown(void) {
+	Con_Printf("IN_AttackDown");
+	KeyDown(&in_attack);
+}
+static void IN_AttackUp(void) {
+	Con_Printf("IN_AttackUp");
+	KeyUp(&in_attack);
+}
 
 static void IN_UseDown(void) {KeyDown(&in_use);}
 static void IN_UseUp(void) {KeyUp(&in_use);}
@@ -934,6 +940,10 @@ static void CL_ClientMovement_Move(cl_clientmovement_state_t *s)
 	trace_t trace;
 	trace_t trace2;
 	trace_t trace3;
+
+	Con_Printf("CL_ClientMovement_Move");
+
+
 	CL_ClientMovement_UpdateStatus(s);
 	VectorCopy(s->velocity, primalvelocity);
 	for (bump = 0, t = s->cmd.frametime;bump < 8 && VectorLength2(s->velocity) > 0;bump++)
@@ -1305,6 +1315,8 @@ static void CL_ClientMovement_Physics_Walk(cl_clientmovement_state_t *s)
 	vec3_t yawangles;
 	trace_t trace;
 
+	Con_Printf("CL_ClientMovement_Physics_Walk");
+
 	// jump if on ground with jump button pressed but only if it has been
 	// released at least once since the last jump
 	if (s->cmd.jump)
@@ -1337,6 +1349,10 @@ static void CL_ClientMovement_Physics_Walk(cl_clientmovement_state_t *s)
 		if (s->crouched)
 			wishspeed *= 0.5;
 
+
+		
+		Cvar_SetValue("slowmo", max(0.1, wishspeed/cl.movevars_maxspeed));
+		
 		// apply edge friction
 		f = sqrt(s->velocity[0] * s->velocity[0] + s->velocity[1] * s->velocity[1]);
 		if (f > 0)
@@ -1452,6 +1468,9 @@ static void CL_ClientMovement_Physics_Walk(cl_clientmovement_state_t *s)
 static void CL_ClientMovement_PlayerMove(cl_clientmovement_state_t *s)
 {
 	//Con_Printf(" %f", frametime);
+
+	Con_Printf("CL_ClientMovement_PlayerMove");
+
 	if (!s->cmd.jump)
 		s->cmd.canjump = true;
 	s->waterjumptime -= s->cmd.frametime;

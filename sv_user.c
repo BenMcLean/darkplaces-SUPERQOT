@@ -157,6 +157,9 @@ static void SV_Accelerate (void)
 	float addspeed, accelspeed, currentspeed;
 
 	currentspeed = DotProduct (PRVM_serveredictvector(host_client->edict, velocity), wishdir);
+
+	Cvar_SetValue("slowmo", max(0.1, wishspeed/sv_maxspeed.value));
+
 	addspeed = wishspeed - currentspeed;
 	if (addspeed <= 0)
 		return;
