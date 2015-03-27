@@ -157,11 +157,13 @@ static void IN_StrafeDown(void) {KeyDown(&in_strafe);}
 static void IN_StrafeUp(void) {KeyUp(&in_strafe);}
 
 static void IN_AttackDown(void) {
-	Con_Printf("IN_AttackDown");
+	Con_Printf("IN_AttackUp\n");
+	Cvar_SetValue("slowmo", 1);
 	KeyDown(&in_attack);
 }
 static void IN_AttackUp(void) {
-	Con_Printf("IN_AttackUp");
+	Con_Printf("IN_AttackUp\n");
+	Cvar_SetValue("slowmo", 0.1);
 	KeyUp(&in_attack);
 }
 

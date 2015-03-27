@@ -182,6 +182,9 @@ static void SV_AirAccelerate (vec3_t wishveloc)
 	if (wishspd > sv_maxairspeed.value)
 		wishspd = sv_maxairspeed.value;
 	currentspeed = DotProduct (PRVM_serveredictvector(host_client->edict, velocity), wishveloc);
+
+	Cvar_SetValue("slowmo", max(0.1, wishspd/sv_maxairspeed.value));
+
 	addspeed = wishspd - currentspeed;
 	if (addspeed <= 0)
 		return;
