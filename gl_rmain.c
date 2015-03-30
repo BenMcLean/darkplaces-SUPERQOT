@@ -12720,6 +12720,9 @@ void R_DrawCustomSurface(skinframe_t *skinframe, const matrix4x4_t *texmatrix, i
 	static msurface_t surface;
 	const msurface_t *surfacelist = &surface;
 
+	if(gl_lightmaps.integer)
+		return;
+
 	// fake enough texture and surface state to render this geometry
 
 	texture.update_lastrenderframe = -1; // regenerate this texture
@@ -12752,6 +12755,9 @@ void R_DrawCustomSurface_Texture(texture_t *texture, const matrix4x4_t *texmatri
 {
 	static msurface_t surface;
 	const msurface_t *surfacelist = &surface;
+	
+	if(gl_lightmaps.integer)
+		return;
 
 	// fake enough texture and surface state to render this geometry
 	surface.texture = texture;

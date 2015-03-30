@@ -155,10 +155,20 @@ static void SV_Accelerate (void)
 	prvm_prog_t *prog = SVVM_prog;
 	int i;
 	float addspeed, accelspeed, currentspeed;
+	float targetSlowmo;
+	float rampUp = 0.1;
 
 	currentspeed = DotProduct (PRVM_serveredictvector(host_client->edict, velocity), wishdir);
+	
+	if(slowmo.flags&8)
+		targetSlowmo = 1;
+	else 
+		targetSlowmo = max(0.05, wishspeed/sv_maxspeed.value);
 
-	Cvar_SetValue("slowmo", max(0.1, wishspeed/sv_maxspeed.value));
+
+	slowmo.value = ((sv.frametime * targetSlowmo) + ((rampUp-sv.frametime) * slowmo.value)) / rampUp;
+
+	//Cvar_SetValue("slowmo", max(0.1, wishspeed/sv_maxspeed.value));
 
 	addspeed = wishspeed - currentspeed;
 	if (addspeed <= 0)
@@ -177,13 +187,21 @@ static void SV_AirAccelerate (vec3_t wishveloc)
 	prvm_prog_t *prog = SVVM_prog;
 	int i;
 	float addspeed, wishspd, accelspeed, currentspeed;
+	float targetSlowmo;
+	float rampUp = 0.1;
 
 	wishspd = VectorNormalizeLength (wishveloc);
 	if (wishspd > sv_maxairspeed.value)
 		wishspd = sv_maxairspeed.value;
 	currentspeed = DotProduct (PRVM_serveredictvector(host_client->edict, velocity), wishveloc);
 
-	Cvar_SetValue("slowmo", max(0.1, wishspd/sv_maxairspeed.value));
+	if(slowmo.flags&8)
+		targetSlowmo = 1;
+	else 
+		targetSlowmo = max(0.05, wishspeed/sv_maxspeed.value);
+
+
+	slowmo.value = ((sv.frametime * targetSlowmo) + ((rampUp-sv.frametime) * slowmo.value)) / rampUp;
 
 	addspeed = wishspd - currentspeed;
 	if (addspeed <= 0)

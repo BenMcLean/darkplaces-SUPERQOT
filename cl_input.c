@@ -156,14 +156,15 @@ static void IN_SpeedUp(void) {KeyUp(&in_speed);}
 static void IN_StrafeDown(void) {KeyDown(&in_strafe);}
 static void IN_StrafeUp(void) {KeyUp(&in_strafe);}
 
+extern cvar_t slowmo;
+
 static void IN_AttackDown(void) {
-	Con_Printf("IN_AttackUp\n");
-	Cvar_SetValue("slowmo", 1);
+	
+	slowmo.flags |= 8;
 	KeyDown(&in_attack);
 }
 static void IN_AttackUp(void) {
-	Con_Printf("IN_AttackUp\n");
-	Cvar_SetValue("slowmo", 0.1);
+	slowmo.flags &= ~8;
 	KeyUp(&in_attack);
 }
 
@@ -943,9 +944,6 @@ static void CL_ClientMovement_Move(cl_clientmovement_state_t *s)
 	trace_t trace2;
 	trace_t trace3;
 
-	Con_Printf("CL_ClientMovement_Move");
-
-
 	CL_ClientMovement_UpdateStatus(s);
 	VectorCopy(s->velocity, primalvelocity);
 	for (bump = 0, t = s->cmd.frametime;bump < 8 && VectorLength2(s->velocity) > 0;bump++)
@@ -1484,6 +1482,7 @@ static void CL_ClientMovement_PlayerMove(cl_clientmovement_state_t *s)
 }
 
 extern cvar_t slowmo;
+
 void CL_UpdateMoveVars(void)
 {
 	if (cls.protocol == PROTOCOL_QUAKEWORLD)
