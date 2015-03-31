@@ -3532,6 +3532,11 @@ void SV_SpawnServer (const char *server)
 	if(cls.state == ca_dedicated)
 		Sys_MakeProcessMean();
 
+	//Run SUPERHOT.cfg
+	Cbuf_AddText("exec superhot.cfg");
+	Cbuf_Execute();
+
+
 //	SV_UnlockThreadMutex();
 }
 

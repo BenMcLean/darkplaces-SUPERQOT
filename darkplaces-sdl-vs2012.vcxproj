@@ -74,8 +74,8 @@
     <OutDir>$(SolutionDir)$(Configuration)-$(ProjectName)\</OutDir>
     <IntDir>$(Configuration)-$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\quake\darkplaces\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\quake\darkplaces\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Data\Tidied\SUPERHOT\darkplaces\include;C:\quake\darkplaces\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Data\Tidied\SUPERHOT\darkplaces\lib\x86;C:\quake\darkplaces\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -83,9 +83,11 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\</OutDir>
+    <OutDir>$(SolutionDir)\Release</OutDir>
     <IntDir>$(Configuration)-$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>

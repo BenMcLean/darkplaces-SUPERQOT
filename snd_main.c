@@ -1293,6 +1293,7 @@ Spatializes a channel
 =================
 */
 extern cvar_t cl_gameplayfix_soundsmovewithentities;
+extern cvar_t slowmo;
 static void SND_Spatialize_WithSfx(channel_t *ch, qboolean isstatic, sfx_t *sfx)
 {
 	int i;
@@ -1333,7 +1334,7 @@ static void SND_Spatialize_WithSfx(channel_t *ch, qboolean isstatic, sfx_t *sfx)
 	}
 
 	mastervol = ch->basevolume;
-	mixspeed = ch->basespeed;
+	mixspeed = ch->basespeed;// * max(0.3, slowmo.value); Nope
 
 	// TODO: implement doppler based on origin change relative to viewer and time of recent origin changes
 

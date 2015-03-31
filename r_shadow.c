@@ -3935,6 +3935,11 @@ static void R_Shadow_PrepareLight(rtlight_t *rtlight)
 	qboolean nolight;
 	qboolean castshadows;
 
+	vec3_t identity;
+	identity[0] = 1;
+	identity[1] = 1;
+	identity[2] = 1;
+
 	rtlight->draw = false;
 	rtlight->cached_numlightentities               = 0;
 	rtlight->cached_numlightentities_noselfshadow  = 0;
@@ -3969,7 +3974,13 @@ static void R_Shadow_PrepareLight(rtlight_t *rtlight)
 
 	// look up the light style value at this time
 	f = ((rtlight->style >= 0 && rtlight->style < MAX_LIGHTSTYLES) ? r_refdef.scene.rtlightstylevalue[rtlight->style] : 1) * r_shadow_lightintensityscale.value;
-	VectorScale(rtlight->color, f, rtlight->currentcolor);
+	
+	//VectorScale(rtlight->color, f, rtlight->currentcolor);
+
+	//Make it gray
+	VectorScale(identity, 0.2*f*VectorLength2(rtlight->color), rtlight->currentcolor);
+	
+	
 	/*
 	if (rtlight->selected)
 	{
