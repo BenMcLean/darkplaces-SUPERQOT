@@ -46,7 +46,7 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)-$(ProjectName)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\$(ProjectName)</TargetName>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\include;$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\include;$(IncludePath)</IncludePath>
