@@ -163,7 +163,7 @@ static void SV_Accelerate (void)
 	if(slowmo.flags&8)
 		targetSlowmo = 1;
 	else 
-		targetSlowmo = max(0.05, wishspeed/sv_maxspeed.value);
+		targetSlowmo = max(0.02, wishspeed/sv_maxspeed.value);
 
 
 	slowmo.value = ((sv.frametime * targetSlowmo) + ((rampUp-sv.frametime) * slowmo.value)) / rampUp;
@@ -198,7 +198,7 @@ static void SV_AirAccelerate (vec3_t wishveloc)
 	if(slowmo.flags&8)
 		targetSlowmo = 1;
 	else 
-		targetSlowmo = max(0.05, wishspeed/sv_maxspeed.value);
+		targetSlowmo = max(0.02, wishspeed/sv_maxspeed.value);
 
 
 	slowmo.value = ((sv.frametime * targetSlowmo) + ((rampUp-sv.frametime) * slowmo.value)) / rampUp;
