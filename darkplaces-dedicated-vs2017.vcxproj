@@ -22,7 +22,7 @@
     <ProjectGuid>{389AE334-D907-4069-90B3-F0551B3EFDE9}</ProjectGuid>
     <RootNamespace>darkplacesdedicated</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>darkplaces-dedicated-vs2012</ProjectName>
+    <ProjectName>darkplaces-dedicated-vs2017</ProjectName>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
