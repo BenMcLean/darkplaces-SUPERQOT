@@ -2883,7 +2883,7 @@ static void M_Menu_Video_FindResolution(int w, int h, float a)
 			if (menu_video_resolutions[i].height == h && menu_video_resolutions[menu_video_resolution].height == h)
 			{
 				// if the new mode would be a worse match in pixel aspect, skip it
-				if (abs(menu_video_resolutions[i].pixelheight - a) > abs(menu_video_resolutions[menu_video_resolution].pixelheight - a))
+				if (abs(menu_video_resolutions[i].height - h) > abs(menu_video_resolutions[menu_video_resolution].height - h))
 					continue;
 				// if it is equal in everything, skip it (prefer earlier modes)
 				if (menu_video_resolutions[i].pixelheight == a && menu_video_resolutions[menu_video_resolution].pixelheight == a)
